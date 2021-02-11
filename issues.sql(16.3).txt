@@ -1,0 +1,44 @@
+CREATE TABLE ISSUESLISTS
+(
+ID MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+NAME VARCHAR (50) NOT NULL
+);
+CREATE TABLE ISSUES
+(
+ID SERIAL PRIMARY KEY,
+ISSUESLIST_ID MEDIUMINT UNSIGNED NOT NULL,
+SUMMARY VARCHAR (100) NOT NULL,
+DESCRIPTION VARCHAR (200) NOT NULL,
+USER_ID_ASSIGNEDTO BIGINT UNSIGNED,
+CONSTRAINT FOREIGN KEY (ISSUESLIST_ID) REFERENCES ISSUESLISTS(ID),
+CONSTRAINT FOREIGN KEY (USER_ID_ASSIGNEDTO) REFERENCES USERS(ID)
+);
+INSERT INTO ISSUESLISTS (NAME)
+VALUES
+("ToDo"),
+("InProgess"),
+("Done");
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES
+(1, "No transaction code", "FA clerk didn't filled tab with transaction code", 2),
+(1, "Wrong posting period", "Posting period in sale transaction was calculated wrongly", 3),
+(1, "Depreciated rulebook records", "Part of Rulebook data is depreciated, contact LFI", 2),
+(1, "Transfer macro generates erroes", "Macro to be updated", 1),
+(1, "New company codes", "Company codes list needs to be upgraded",1),
+(2, "Wrong asset number", "Wrong asset was scrapped", 2),
+(2, "Depreciation run passed after proper term", "No premission from LFI", 4),
+(2, "Prior year acquisition wasn't checked", "Clerk didn't checked year of the acquisition", 3),
+(2, "New macro for massive sale", "New, upgraded macro for massie sale to be prepared", 1),
+(2, "MSIT doesn't appear on the list", "Contact IT section", 4),
+(3, "Inestment proposal without autorization", "Ask LFI to correct the template", 2),
+(3, "New open items list", "New complex open items list template to implement",2),
+(3, "Different format for Asset Balances sheet", "Document standarization project", 3),
+(3, "Another attachment to Communication Rulebook", "Changes to be made in documents list", 3),
+(3,"Transaction simualtion is not working", "Contact IT section", 4);
+COMMIT;
+
+
+
+
+
+
